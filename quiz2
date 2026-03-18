@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Quiz Generator</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+/* 🌌 BACKGROUND */
+body{
+background:url('https://i.pinimg.com/1200x/ef/31/35/ef313592fa01319332bb7d8c8131574d.jpg') no-repeat center center/cover;
+color:#e2e8f0;
+}
+
+/* overlay (LESS blur, more glow) */
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:linear-gradient(
+to bottom,
+rgba(5,10,30,0.6),
+rgba(5,10,30,0.85)
+);
+backdrop-filter:blur(2px);
+z-index:-1;
+}
+
+/* ✨ subtle aurora glow */
+body::after{
+content:"";
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at 20% 30%, rgba(34,211,238,0.15), transparent 40%),
+radial-gradient(circle at 80% 70%, rgba(139,92,246,0.15), transparent 40%);
+z-index:-2;
+}
+
+/* 🧭 NAVBAR */
+.navbar{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:18px 40px;
+background:rgba(10,20,40,0.6);
+backdrop-filter:blur(10px);
+border-bottom:1px solid rgba(255,255,255,0.08);
+position:relative;
+}
+
+/* LOGO */
+.logo{
+font-size:20px;
+font-weight:800;
+letter-spacing:2px;
+background:linear-gradient(90deg,#22d3ee,#8b5cf6);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+/* CENTER NAV */
+.nav-center{
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+display:flex;
+gap:30px;
+}
+
+.nav-center a{
+color:#cbd5f5;
+text-decoration:none;
+position:relative;
+}
+
+.nav-center a::after{
+content:"";
+position:absolute;
+bottom:-4px;
+left:0;
+width:0%;
+height:2px;
+background:#22d3ee;
+transition:0.3s;
+}
+
+.nav-center a:hover::after{
+width:100%;
+}
+
+.nav-center a:hover{
+color:white;
+}
+
+/* RIGHT */
+.nav-right button{
+margin-left:10px;
+padding:8px 16px;
+border-radius:10px;
+border:none;
+cursor:pointer;
+}
+
+.login{
+background:transparent;
+color:#cbd5f5;
+}
+
+.signup{
+background:linear-gradient(90deg,#22d3ee,#4ade80);
+color:#0f172a;
+font-weight:600;
+}
+
+/* 🌟 MAIN */
+.container{
+max-width:850px;
+margin:60px auto;
+padding:20px;
+}
+
+/* TITLE */
+h1{
+font-size:42px;
+font-weight:800;
+text-align:center;
+}
+
+.badge{
+background:linear-gradient(270deg,#22d3ee,#8b5cf6,#fb923c);
+background-size:300% 300%;
+animation:move 6s infinite;
+padding:4px 10px;
+border-radius:8px;
+font-size:12px;
+}
+
+.subtitle{
+text-align:center;
+color:#cbd5f5;
+margin-bottom:30px;
+}
+
+/* 🧊 CARD */
+.card{
+background:rgba(20,25,50,0.6);
+padding:30px;
+border-radius:20px;
+backdrop-filter:blur(12px);
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:
+0 20px 40px rgba(0,0,0,0.6),
+0 0 30px rgba(139,92,246,0.1);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-6px);
+box-shadow:
+0 30px 60px rgba(0,0,0,0.7),
+0 0 40px rgba(34,211,238,0.2);
+}
+
+/* FORM */
+label{
+margin-top:15px;
+display:block;
+font-weight:500;
+}
+
+input, select, textarea{
+width:100%;
+padding:12px;
+border-radius:10px;
+border:none;
+background:rgba(255,255,255,0.05);
+color:white;
+margin-top:6px;
+}
+
+/* RANGE */
+.range-value{
+float:right;
+color:#22d3ee;
+}
+
+/* TYPES */
+.types button{
+margin:5px;
+padding:8px 12px;
+border-radius:10px;
+border:1px solid rgba(255,255,255,0.1);
+background:rgba(255,255,255,0.05);
+color:#cbd5f5;
+cursor:pointer;
+transition:0.3s;
+}
+
+.types button.active{
+background:#22d3ee;
+color:#0f172a;
+}
+
+/* TOGGLE */
+.toggle{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-top:20px;
+}
+
+.switch{
+width:40px;
+height:20px;
+background:#444;
+border-radius:20px;
+position:relative;
+cursor:pointer;
+}
+
+.switch::after{
+content:"";
+width:18px;
+height:18px;
+background:white;
+position:absolute;
+top:1px;
+left:1px;
+border-radius:50%;
+transition:0.3s;
+}
+
+.switch.active{
+background:#22d3ee;
+}
+
+.switch.active::after{
+left:21px;
+}
+
+/* 🌈 BUTTON */
+.generate-btn{
+width:100%;
+margin-top:25px;
+padding:15px;
+border:none;
+border-radius:12px;
+background:linear-gradient(270deg,#22d3ee,#8b5cf6,#fb923c,#22d3ee);
+background-size:400% 400%;
+animation:move 6s infinite;
+color:white;
+font-weight:600;
+cursor:pointer;
+}
+
+@keyframes move{
+0%{background-position:0%}
+50%{background-position:100%}
+100%{background-position:0%}
+}
+
+/* TIPS */
+.tips{
+margin-top:30px;
+padding:20px;
+border-radius:15px;
+background:rgba(20,25,50,0.5);
+border:1px solid rgba(255,255,255,0.08);
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+
+<div class="logo">NOVA</div>
+
+<div class="nav-center">
+<a href="home.html">Home</a>
+<a href="quiz.html"><b>Quiz Generator</b></a>
+<a href="Ai.html">AI Assistant</a>
+<a href="calendar.html">Schedule Manager</a>
+<a href="#">Grades ▾</a>
+</div>
+
+<div class="nav-right">
+<button class="login"><a href="Login.html">Login</a></button>
+<button class="signup"><a href="sign up.html">Sign up</a></button>
+</div>
+
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+
+<h1>Create New Quiz <span class="badge">AI</span></h1>
+<p class="subtitle">Generate custom quizzes instantly with AI</p>
+
+<div class="card">
+
+<label>Quiz Title</label>
+<input type="text">
+
+<label>Subject</label>
+<select>
+<option>Select a subject</option>
+<option>Math</option>
+<option>Science</option>
+<option>History</option>
+</select>
+
+<label>Topic</label>
+<textarea rows="3"></textarea>
+
+<label>Questions <span class="range-value" id="rangeVal">5</span></label>
+<input type="range" min="5" max="50" value="5" id="range">
+
+<label>Difficulty</label>
+<select>
+<option>Easy</option>
+<option>Medium</option>
+<option>Hard</option>
+</select>
+
+<div class="types">
+<button>Multiple Choice</button>
+<button>True/False</button>
+<button>Short Answer</button>
+<button>Fill in the Blank</button>
+</div>
+
+<div class="toggle">
+<span>Time Limit</span>
+<div class="switch" id="toggle"></div>
+</div>
+
+<button class="generate-btn">✨ Generate Quiz</button>
+
+</div>
+
+</div>
+
+<script>
+const range=document.getElementById("range");
+const rangeVal=document.getElementById("rangeVal");
+
+range.addEventListener("input",()=>rangeVal.innerText=range.value);
+
+document.querySelectorAll(".types button").forEach(btn=>{
+btn.addEventListener("click",()=>btn.classList.toggle("active"));
+});
+
+const toggle=document.getElementById("toggle");
+toggle.addEventListener("click",()=>toggle.classList.toggle("active"));
+</script>
+
+</body>
+</html>
