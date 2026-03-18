@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Learning Assistant</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+body{
+background:url('https://i.pinimg.com/736x/90/56/14/9056140c63818a0cfe8640fd3e35e18f.jpg') no-repeat center center/cover;
+color:#e2e8f0;
+}
+
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:rgba(5,10,30,0.8); /* slightly darker overlay */
+backdrop-filter:blur(2px); /* keep blur low */
+z-index:-1;
+}
+
+/* ✨ glow */
+body::after{
+content:"";
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at 20% 30%, rgba(34,211,238,0.15), transparent 40%),
+radial-gradient(circle at 80% 70%, rgba(139,92,246,0.15), transparent 40%);
+z-index:-2;
+}
+
+/* 🧭 NAVBAR */
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 40px;
+background:rgba(10,20,40,0.7);
+backdrop-filter:blur(12px);
+border-bottom:1px solid rgba(255,255,255,0.08);
+position:relative;
+}
+
+/* LOGO */
+.logo{
+font-weight:800;
+font-size:20px;
+background:linear-gradient(90deg,#22d3ee,#4ade80);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+/* CENTER NAV */
+.nav-center{
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+display:flex;
+gap:30px;
+}
+
+.nav-center a{
+color:#cbd5f5;
+text-decoration:none;
+position:relative;
+}
+
+.nav-center a::after{
+content:"";
+position:absolute;
+bottom:-4px;
+left:0;
+width:0%;
+height:2px;
+background:#22d3ee;
+transition:0.3s;
+}
+
+.nav-center a:hover::after{
+width:100%;
+}
+
+.nav-center a:hover{
+color:white;
+}
+
+/* RIGHT */
+.nav-right button{
+margin-left:10px;
+padding:8px 16px;
+border-radius:10px;
+border:none;
+cursor:pointer;
+}
+
+.login{
+background:transparent;
+color:#cbd5f5;
+}
+
+.signup{
+background:#22d3ee;
+color:#0f172a;
+font-weight:600;
+}
+
+/* 🧊 MAIN CONTAINER */
+.container{
+max-width:900px;
+margin:50px auto;
+padding:25px;
+border-radius:20px;
+background:rgba(20,25,50,0.6);
+backdrop-filter:blur(14px);
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:0 20px 50px rgba(0,0,0,0.6);
+}
+
+/* HEADER */
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+.title{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.badge{
+width:40px;
+height:40px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(135deg,#22d3ee,#8b5cf6);
+color:white;
+font-size:18px;
+}
+
+.subtitle{
+font-size:13px;
+color:#94a3b8;
+}
+
+/* CHAT */
+.chat-box{
+margin-top:20px;
+border-radius:15px;
+padding:20px;
+background:rgba(255,255,255,0.03);
+border:1px solid rgba(255,255,255,0.05);
+min-height:150px;
+}
+
+.message{
+background:rgba(34,211,238,0.1);
+padding:12px;
+border-radius:10px;
+max-width:80%;
+}
+
+.time{
+font-size:12px;
+color:#94a3b8;
+margin-top:5px;
+}
+
+/* SUGGESTIONS */
+.suggestions{
+margin-top:25px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+margin-top:10px;
+}
+
+.card{
+padding:12px;
+border-radius:12px;
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.08);
+cursor:pointer;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-4px);
+background:rgba(34,211,238,0.1);
+}
+
+/* INPUT */
+.input-area{
+display:flex;
+gap:10px;
+margin-top:20px;
+}
+
+.input-area input{
+flex:1;
+padding:12px;
+border-radius:10px;
+border:none;
+background:rgba(255,255,255,0.05);
+color:white;
+}
+
+.send-btn{
+width:45px;
+border:none;
+border-radius:10px;
+background:linear-gradient(90deg,#22d3ee,#4ade80);
+color:#0f172a;
+cursor:pointer;
+}
+
+/* FOOTER */
+.footer-note{
+font-size:12px;
+color:#94a3b8;
+margin-top:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+
+<div class="logo">NOVA</div>
+
+<div class="nav-center">
+<a href="home.html">Home</a>
+<a href="quiz.html">Quiz Generator</a>
+<a href="ai.html"><b>AI Assistant</b></a>
+<a href="calendar.html">Schedule Manager</a>
+<a href="#">Grades ▾</a>
+</div>
+
+<div class="nav-right">
+<button class="login">Log In</button>
+<button class="signup">Sign Up</button>
+</div>
+
+</div>
+
+<!-- MAIN -->
+<div class="container">
+
+<div class="header">
+<div class="title">
+<div class="badge">✦</div>
+<div>
+<strong>AI Learning Assistant</strong>
+<div class="subtitle">Always here to help</div>
+</div>
+</div>
+
+<div>🔄 New Chat</div>
+</div>
+
+<div class="chat-box" id="chatBox">
+<div class="message">
+Hi! I'm your AI assistant. What would you like to learn today?
+</div>
+<div class="time">11:19 PM</div>
+</div>
+
+<div class="suggestions">
+<h4>Try asking:</h4>
+
+<div class="cards">
+<div class="card" onclick="sendSuggestion('Explain photosynthesis')">📘 Explain photosynthesis</div>
+<div class="card" onclick="sendSuggestion('Solve quadratic equations')">🧮 Solve equations</div>
+<div class="card" onclick="sendSuggestion('Study tips')">💡 Study tips</div>
+<div class="card" onclick="sendSuggestion('Time management')">⏱ Time management</div>
+</div>
+</div>
+
+<div class="input-area">
+<input id="userInput" placeholder="Ask anything...">
+<button class="send-btn" onclick="sendMessage()">➤</button>
+</div>
+
+<div class="footer-note">
+AI can make mistakes. Always verify.
+</div>
+
+</div>
+
+<script>
+function sendMessage(){
+const input=document.getElementById("userInput");
+const chatBox=document.getElementById("chatBox");
+
+if(input.value.trim()==="")return;
+
+const msg=document.createElement("div");
+msg.className="message";
+msg.style.marginTop="10px";
+msg.innerText=input.value;
+
+chatBox.appendChild(msg);
+input.value="";
+}
+
+function sendSuggestion(text){
+document.getElementById("userInput").value=text;
+sendMessage();
+}
+</script>
+
+</body>
+</html>
