@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOVA - Create Schedule</title>
+
+<!-- FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+body{
+background:url('https://i.pinimg.com/1200x/ad/fa/ed/adfaedecd09d2f47227902f51a057929.jpg') no-repeat center center/cover;
+color:#e0e7ff;
+position:relative;
+}
+
+body::before{
+content:"";
+position:fixed;
+inset:0;
+backdrop-filter:blur(1px);
+background:rgba(10,20,40,0.25);
+z-index:-1;
+}
+
+/* 🔥 NAVBAR */
+
+.navbar{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:18px 40px;
+background:rgba(10,20,40,0.75);
+backdrop-filter:blur(12px);
+border-bottom:1px solid rgba(255,255,255,0.08);
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+/* LOGO */
+.logo{
+font-size:22px;
+font-weight:800;
+letter-spacing:2px;
+color:#22d3ee;
+}
+
+/* LINKS */
+.nav-links{
+display:flex;
+gap:30px;
+list-style:none;
+}
+
+.nav-links a{
+text-decoration:none;
+color:#cbd5f5;
+font-weight:500;
+position:relative;
+}
+
+/* underline animation */
+.nav-links a::after{
+content:"";
+position:absolute;
+bottom:-4px;
+left:0;
+width:0%;
+height:2px;
+background:#22d3ee;
+transition:0.3s;
+}
+
+.nav-links a:hover::after{
+width:100%;
+}
+
+.nav-links a:hover{
+color:white;
+}
+
+/* RIGHT SIDE */
+.nav-right{
+display:flex;
+gap:20px;
+align-items:center;
+}
+
+.login{
+color:#cbd5f5;
+text-decoration:none;
+}
+
+.signup{
+padding:8px 16px;
+border-radius:10px;
+background:#22d3ee;
+color:#0f172a;
+text-decoration:none;
+font-weight:600;
+}
+
+/* DROPDOWN */
+.dropdown{
+position:relative;
+}
+
+.dropdown-menu{
+display:none;
+position:absolute;
+top:120%;
+left:0;
+background:rgba(20,30,60,0.95);
+border-radius:10px;
+padding:10px 0;
+min-width:180px;
+}
+
+.dropdown-menu a{
+display:block;
+padding:10px 15px;
+}
+
+.dropdown:hover .dropdown-menu{
+display:block;
+}
+
+/* CONTAINER */
+.container{
+max-width:1100px;
+margin:40px auto;
+padding:20px;
+}
+
+/* TITLE */
+h1{
+font-size:36px;
+margin-top:10px;
+}
+
+.badge{
+background:linear-gradient(90deg,#22d3ee,#fb923c);
+padding:4px 10px;
+border-radius:8px;
+font-size:12px;
+}
+
+.subtitle{
+color:#c7d2fe;
+margin-bottom:20px;
+}
+
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+/* PANELS */
+.panel{
+background:rgba(30,30,70,0.6);
+padding:20px;
+border-radius:18px;
+backdrop-filter:blur(14px);
+border:1px solid rgba(255,255,255,0.1);
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* TABS */
+.tabs{
+display:flex;
+background:rgba(255,255,255,0.05);
+border-radius:10px;
+padding:5px;
+}
+
+.tab{
+flex:1;
+padding:10px;
+border:none;
+background:transparent;
+color:#cbd5f5;
+cursor:pointer;
+}
+
+.tab.active{
+background:rgba(255,255,255,0.1);
+border-radius:8px;
+color:white;
+}
+
+/* CONTENT */
+.tab-content{
+display:none;
+margin-top:20px;
+}
+
+.tab-content.active{
+display:block;
+}
+
+/* AI BOX */
+.ai-box{
+background:rgba(255,255,255,0.05);
+padding:15px;
+border-radius:10px;
+margin-bottom:15px;
+border-left:4px solid #22d3ee;
+}
+
+/* BUTTON */
+.generate{
+width:100%;
+margin-top:10px;
+padding:12px;
+background:linear-gradient(90deg,#22d3ee,#8b5cf6,#fb923c);
+border:none;
+border-radius:10px;
+color:white;
+cursor:pointer;
+transition:0.3s;
+}
+
+.generate:hover{
+transform:scale(1.03);
+}
+
+/* INPUTS */
+textarea,input{
+width:100%;
+margin-top:10px;
+padding:10px;
+border-radius:10px;
+border:none;
+background:rgba(255,255,255,0.05);
+color:white;
+}
+
+/* SCHEDULE */
+.schedule-item{
+display:flex;
+justify-content:space-between;
+padding:12px;
+border-top:1px solid rgba(255,255,255,0.1);
+}
+
+.empty{
+text-align:center;
+color:#aaa;
+margin-top:20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+
+<div class="logo">NOVA</div>
+
+<ul class="nav-links">
+<li><a href="home.html">Home</a></li>
+<li><a href="quiz.html">Quiz Generator</a></li>
+<li><a href="ai.html">AI Assistant</a></li>
+<li><a href="calendar.html">Schedule Manager</a></li>
+
+<li class="dropdown">
+<a href="#">Grades ▾</a>
+<div class="dropdown-menu">
+<a href="#">Primary School</a>
+<a href="#">Middle School</a>
+<a href="#">High School</a>
+</div>
+</li>
+</ul>
+
+<div class="nav-right">
+<a href="Login.html" class="login">Log In</a>
+<a href="sign up.html" class="signup">Sign Up</a>
+</div>
+
+</nav>
+
+<div class="container">
+
+<a href="calendar.html">← Back</a>
+
+<h1>Create Your Schedule <span class="badge">AI</span></h1>
+<p class="subtitle">Let AI generate your perfect schedule</p>
+
+<div class="grid">
+
+<!-- LEFT -->
+<div class="panel">
+
+<div class="tabs">
+<button class="tab active" onclick="switchTab(event,'ai')">AI Generate</button>
+<button class="tab" onclick="switchTab(event,'manual')">Manual</button>
+<button class="tab" onclick="switchTab(event,'settings')">Settings</button>
+</div>
+
+<div id="ai" class="tab-content active">
+<div class="ai-box">
+<h3>💡 AI Scheduling</h3>
+<p>Describe your ideal schedule</p>
+</div>
+
+<textarea id="prompt"></textarea>
+<button class="generate" onclick="generateSchedule()">✨ Generate</button>
+</div>
+
+<div id="manual" class="tab-content">
+<input id="time" type="time">
+<input id="task" placeholder="Task name">
+<button class="generate" onclick="addItem()">Add</button>
+</div>
+
+<div id="settings" class="tab-content">
+<p>No settings yet 😄</p>
+</div>
+
+</div>
+
+<!-- RIGHT -->
+<div class="panel">
+<div class="schedule-header">
+<h3>Your Schedule</h3>
+<span id="count">0 items</span>
+</div>
+
+<div id="schedule-list">
+<p class="empty">No schedule yet</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function switchTab(e,tab){
+document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+document.querySelectorAll(".tab-content").forEach(c=>c.classList.remove("active"));
+document.getElementById(tab).classList.add("active");
+e.target.classList.add("active");
+}
+
+let schedule=[];
+
+function updateUI(){
+const list=document.getElementById("schedule-list");
+const count=document.getElementById("count");
+
+list.innerHTML="";
+
+if(schedule.length===0){
+list.innerHTML="<p class='empty'>No schedule yet</p>";
+}else{
+schedule.forEach(item=>{
+const div=document.createElement("div");
+div.className="schedule-item";
+div.innerHTML=`<span>${item.time}</span><span>${item.task}</span>`;
+list.appendChild(div);
+});
+}
+
+count.innerText=schedule.length+" items";
+}
+
+function addItem(){
+const time=document.getElementById("time").value;
+const task=document.getElementById("task").value;
+if(!time||!task)return;
+schedule.push({time,task});
+updateUI();
+}
+
+function generateSchedule(){
+schedule=[
+{time:"09:00",task:"Study"},
+{time:"11:00",task:"Break"},
+{time:"13:00",task:"Homework"}
+];
+updateUI();
+}
+
+</script>
+
+</body>
+</html>
