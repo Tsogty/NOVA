@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOVA Education</title>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+  body {
+    background: url('https://i.pinimg.com/736x/df/ce/b5/dfceb5afe82af9ca0d2c4e6973612fb1.jpg') no-repeat center center/cover;
+    position: relative;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.35);
+    z-index: -1;
+  }
+
+  .nav-wrapper {
+    position: relative;
+  }
+
+  .nav-wrapper::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("./images/constellation.png") center/contain no-repeat;
+    opacity: 0.25;
+    z-index: 0;
+  }
+
+  .nav-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+
+  .animated-gradient {
+    background: linear-gradient(270deg, #3b82f6, #8b5cf6, #ec4899, #3b82f6);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
+  }
+
+  .text-animated {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  button:hover {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
+  }
+
+  .planet-icon {
+    font-size: 32px;
+    margin-bottom: 10px;
+    display: inline-block;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0px); }
+  }
+
+
+  .logo-img {
+    transition: transform 0.3s ease;
+  }
+
+  .logo-img:hover {
+    transform: rotate(-5deg) scale(1.1);
+  }
+
+</style>
+</head>
+
+<body class="text-gray-800">
+
+
+<header class="w-full bg-white/70 backdrop-blur-md shadow-sm nav-wrapper">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between nav-content">
+
+   <div class="flex items-center gap-3 font-bold text-lg">
+  <img src="C:\Users\PC-02\Downloads\star.png" alt="sigma.jpg" class="w-30 h-16">
+  <span class="animated-gradient text-animated">NOVA</span>
+</div>
+
+    <nav class="hidden md:flex items-center gap-8 text-gray-700 font-medium">
+      <a href="home.html">Home</a>
+      <a href="quiz.html">Quiz Generator</a>
+      <a href="Ai.html">AI Assistant</a>
+      <a href="calendar.html">Schedule Manager</a>
+
+      <div class="relative dropdown">
+        <button>Grades ▾</button>
+        <div class="dropdown-menu hidden absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg">
+          <a href="#" class="block px-4 py-2 hover:bg-gray-100">Primary School</a>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-100">Middle School</a>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-100">High School</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="flex gap-4">
+      <button><a href="Login.html">Log In</a></button>
+      <button class="px-4 py-2 rounded-lg text-white animated-gradient hover:scale-105 transition">
+        <a href="sign up.html">Sign Up</a>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+
+<section class="text-center py-20 px-6">
+
+  <div class="inline-block px-4 py-1 text-sm bg-white/70 backdrop-blur rounded-full shadow mb-6">
+    ✨ Now with AI-powered learning
+  </div>
+
+  <h1 class="text-5xl font-bold mb-4">
+    Education.<br>
+    <span class="animated-gradient text-animated">
+      Reimagined.
+    </span>
+  </h1>
+
+  <p class="max-w-xl mx-auto text-gray-700 mb-8">
+    A beautifully designed platform that adapts to your learning journey.
+    From primary school to high school, we've got you covered.
+  </p>
+
+  <div class="flex justify-center gap-4">
+    <button class="px-6 py-3 rounded-lg text-white animated-gradient hover:scale-105 transition">
+      Get Started
+    </button>
+
+    <button class="px-6 py-3 rounded-lg bg-white/70 backdrop-blur shadow">
+      Watch Video
+    </button>
+  </div>
+
+</section>
+
+
+<section class="max-w-6xl mx-auto px-6 pb-20">
+
+  <h2 class="text-3xl font-bold text-center mb-2">
+    Everything you need.
+  </h2>
+
+  <p class="text-center text-gray-700 mb-12">
+    Nothing you don't.
+  </p>
+
+  <div class="grid md:grid-cols-3 gap-8">
+
+    <div class="bg-white/70 backdrop-blur p-6 rounded-xl shadow">
+      <div class="planet-icon">🪐</div>
+      <h3 class="font-semibold text-lg mb-2">Grade-Specific Learning</h3>
+      <p class="text-gray-600 text-sm">
+        Tailored content and curriculum for primary, middle, and high school students.
+      </p>
+    </div>
+
+    <div class="bg-white/70 backdrop-blur p-6 rounded-xl shadow">
+      <div class="planet-icon">🌌</div>
+      <h3 class="font-semibold text-lg mb-2">Smart Quiz Generator</h3>
+      <p class="text-gray-600 text-sm">
+        AI-powered quizzes that adapt to your learning pace and style.
+      </p>
+    </div>
+
+    <div class="bg-white/70 backdrop-blur p-6 rounded-xl shadow">
+      <div class="planet-icon">🤖</div>
+      <h3 class="font-semibold text-lg mb-2">AI Learning Assistant</h3>
+      <p class="text-gray-600 text-sm">
+        Get instant help with homework, concepts, and exam preparation.
+      </p>
+    </div>
+
+    <div class="bg-white/70 backdrop-blur p-6 rounded-xl shadow">
+      <div class="planet-icon">📅</div>
+      <h3 class="font-semibold text-lg mb-2">Schedule Manager</h3>
+      <p class="text-gray-600 text-sm">
+        Organize classes, assignments, and study time effortlessly.
+      </p>
+    </div>
+
+    <div class="bg-white/70 backdrop-blur p-6 rounded-xl shadow">
+      <div class="planet-icon">📊</div>
+      <h3 class="font-semibold text-lg mb-2">Progress Tracking</h3>
+      <p class="text-gray-600 text-sm">
+        Monitor your growth with detailed analytics and insights.
+      </p>
+    </div>
+
+    <div class="bg-white/70 backdrop-blur p-6 rounded-xl shadow">
+      <div class="planet-icon">👥</div>
+      <h3 class="font-semibold text-lg mb-2">Collaborative Learning</h3>
+      <p class="text-gray-600 text-sm">
+        Study together with peers and share knowledge seamlessly.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- CTA -->
+<section class="max-w-5xl mx-auto px-6 pb-24">
+
+  <div class="rounded-2xl text-center py-14 px-8 bg-white/70 backdrop-blur shadow">
+
+    <h2 class="text-3xl font-bold mb-3">
+      Ready to transform your learning?
+    </h2>
+
+    <p class="text-gray-700 mb-6">
+      Join thousands of students already experiencing the future of education.
+    </p>
+
+    <button class="px-6 py-3 rounded-lg text-white animated-gradient hover:scale-105 transition">
+      Start Learning Today
+    </button>
+
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="text-center text-sm text-gray-700 pb-6">
+  © 2025 EduPlatform. Designed with care.
+</footer>
+
+</body>
+</html>
